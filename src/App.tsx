@@ -17,13 +17,14 @@ function App() {
   }, [])
 
   function responseGoogle(event: any) { console.log(event) }
-
-  const currentUrl = window.location.href;
-
-  console.log(currentUrl !== "http://localhost:3000/")
+  const token = 'your-secure-token';
 
   function getDummyData() {
-    axios.get('/custom-path/unknown')
+    axios.get('/custom-path/unknown', {
+      headers: {
+        'Authorization': `Bearer ${token}`,
+      }
+    })
       .then((response: unknown) => {
         console.log(response, "response")
       })
