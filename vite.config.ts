@@ -10,7 +10,13 @@ export default defineConfig({
       '/custom-path/unknown': {
         target: 'https://dummyapi.online',
         changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/custom-path\/unknown/, '/api/movies'),
+        configure: (proxy, options) => {
+          // proxy will be an instance of 'http-proxy'
+          const username = 'username';
+          const password = 'password';
+          options.auth = `${username}:${password}`;
+        },
+        rewrite: (path) => path.replace(/^\/custom-path\/unknown/, '/api/movies')
       },
     },
   }
